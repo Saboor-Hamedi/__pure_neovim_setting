@@ -42,8 +42,16 @@ api.nvim_set_keymap('n', '<leader>e', '<cmd>lua ToggleNetrw()<CR>', default_opts
 api.nvim_set_keymap('i', '[', '[]<left>', { noremap = true })
 api.nvim_set_keymap('i', '(', '()<left>', { noremap = true })
 api.nvim_set_keymap('i', '{', '{}<left>', { noremap = true })
+api.nvim_set_keymap('i', '"', '""<left>', { noremap = true })
 api.nvim_set_keymap('i', '/*', '/**/<left><left>', { noremap = true })
 
+-- Search for files 
+api.nvim_set_keymap('n', '<C-p>', ':find ', { noremap = true })
+
+api.nvim_set_keymap('n', '<leader>n', ':bn<CR>', { noremap = true })
+api.nvim_set_keymap('n', '<leader>p', ':bp<CR>', { noremap = true })
+
+api.nvim_set_keymap('n', '<leader>g', ':vimgrep /', { noremap = true })
 -- Disable auto commenting in a new line for certain file types
 api.nvim_create_autocmd("FileType", {
     callback = function()

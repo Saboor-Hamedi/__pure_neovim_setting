@@ -39,6 +39,7 @@ opt.signcolumn = "yes"    -- Always show sign column
 -- Searching
 opt.ignorecase = true -- Ignore case in search patterns
 opt.smartcase = true  -- Overrides ignorecase if the search pattern contains capital letters
+opt.path:append { "**" } -- Search recursively in subfolders
 
 -- UI/UX
 opt.mouse = "a"           -- Enable mouse support in all modes
