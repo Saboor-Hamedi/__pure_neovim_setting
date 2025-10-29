@@ -1,15 +1,23 @@
+-- =========================================================
+-- 🔁 AUTOCMDS
+-- =========================================================
+local api = vim.api
 
-local cmd = vim.cmd
-cmd [[
-  syntax enable
-  filetype plugin indent on
-  set termguicolors
-  set background=dark
-  colorscheme desert
-]]
+-- Highlight text on yank
+api.nvim_create_autocmd("TextYankPost", {
+  callback = function()
+    vim.highlight.on_yank({ timeout = 150 })
+  end,
+})
 
-vim.api.nvim_set_hl(0, "Comment", { fg = "#888888", italic = true })
-vim.api.nvim_set_hl(0, "String", { fg = "#a8ff60" })
-vim.api.nvim_set_hl(0, "Function", { fg = "#ffd75f", bold = true })
+-- Auto reload Lua config on save
+api.nvim_create_autocmd("BufWritePost", {
+  pattern = "*.lua",
+  command = "source %",
+})
 
-
+-- Automatically remove trailing spaces on save
+api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*",
+  command = "%s/\\s\\+$//e",
+})
