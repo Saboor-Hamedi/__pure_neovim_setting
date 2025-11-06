@@ -79,3 +79,9 @@ end, { desc = 'Go to next diagnostic message' })
 
 vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+
+-- Keymap to open the Markdown preview
+vim.keymap.set('n', '<leader>mp', '<cmd>MarkdownPreview<CR>', { desc = 'Open Markdown Preview', buffer = true })
+
+-- Keymap to stop/close the Markdown preview
+vim.keymap.set('n', '<leader>mc', '<cmd>MarkdownPreviewStop<CR>', { desc = 'Close Markdown Preview', buffer = true })
