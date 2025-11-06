@@ -1,5 +1,5 @@
 require 'core.options'
-require 'core.keymaps'
+
 require 'core.snippets'
 require 'core.python_terminal'
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -33,4 +33,5 @@ require('lazy').setup {
   require 'plugins.indent-blankline',
   require 'plugins.mics',
   require 'plugins.comment',
+  require 'plugins.flash',
 }
