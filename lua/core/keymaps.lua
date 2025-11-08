@@ -67,7 +67,9 @@ vim.keymap.set('v', '>', '>gv', opts)
 
 -- Keep last yanked when pasting
 vim.keymap.set('v', 'p', '"_dP', opts)
-
+-- move lines
+vim.api.nvim_set_keymap('v', '<A-k>', ':move -2<CR>', { noremap = true, silent = true, desc = 'Move line up' })
+vim.api.nvim_set_keymap('v', '<A-j>', ':move +1<CR>', { noremap = true, silent = true, desc = 'Move line down' })
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', function()
   vim.diagnostic.jump { count = -1, float = true }
