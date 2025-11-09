@@ -56,6 +56,13 @@ return {
             ['<C-l>'] = require('telescope.actions').select_default, -- open file
           },
         },
+        border = {
+          preview = true,
+          prompt = true,
+          results = false,
+        },
+
+        borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
       },
       pickers = {
         find_files = {
@@ -80,11 +87,12 @@ return {
     pcall(require('telescope').load_extension, 'fzf')
     pcall(require('telescope').load_extension, 'ui-select')
 
-    -- See `:help telescope.builtin`
     local builtin = require 'telescope.builtin'
+    -- vim.keymap.set('n', '<C-p>', builtin.find_files, { desc = '[S]earch [F]iles' })
+    -- See `:help telescope.builtin`
+
     vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
     vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-    vim.keymap.set('n', '<C-p>', builtin.find_files, { desc = '[S]earch [F]iles' })
     vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
     vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
     vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
@@ -92,7 +100,20 @@ return {
     vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
     vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
     vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+    -- Search file customized
+    local function find_files_centered()
+      builtin.find_files {
+        previewer = false, -- Disable the big preview
+        layout_strategy = 'center',
+        layout_config = {
+          width = 0.5,
+          height = 0.3,
+          anchor = 'N',
+        },
+      }
+    end
 
+    vim.keymap.set('n', '<C-p>', find_files_centered, { desc = '[S]earch [F]iles (Centered)' })
     -- Slightly advanced example of overriding default behavior and theme
     vim.keymap.set('n', '<leader>/', function()
       -- You can pass additional configuration to Telescope to change the theme, layout, etc.

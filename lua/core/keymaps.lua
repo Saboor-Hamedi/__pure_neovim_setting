@@ -1,4 +1,5 @@
 -- Set leader key
+
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -7,7 +8,7 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- For conciseness
 local opts = { noremap = true, silent = true }
-
+local api = vim.api
 -- save file
 vim.keymap.set('n', '<C-s>', '<cmd> w <CR>', opts)
 
@@ -87,3 +88,5 @@ vim.keymap.set('n', '<leader>mp', '<cmd>MarkdownPreview<CR>', { desc = 'Open Mar
 
 -- Keymap to stop/close the Markdown preview
 vim.keymap.set('n', '<leader>mc', '<cmd>MarkdownPreviewStop<CR>', { desc = 'Close Markdown Preview', buffer = true })
+-- :find, search files
+api.nvim_set_keymap('n', '<leader>ff', ':find ', { noremap = true })
