@@ -16,8 +16,8 @@ return {
         'eslint_d', -- ts/js linter
         'shfmt', -- Shell formatter
         'checkmake', -- linter for Makefiles
-        -- 'stylua', -- lua formatter; Already installed via Mason
-        -- 'ruff', -- Python linter and formatter; Already installed via Mason
+        'jinja',
+        'django',
       },
       automatic_installation = true,
     }

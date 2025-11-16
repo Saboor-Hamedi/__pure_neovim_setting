@@ -169,7 +169,7 @@ return {
             },
             diagnostics = {
               globals = { 'vim' },
-              disable = { 'missing-fields' },
+              disable = { 'missing-fields', 'unused-local', 'trailing-whitespace' },
             },
             format = {
               enable = false,

@@ -66,11 +66,41 @@ return {
       },
       pickers = {
         find_files = {
-          file_ignore_patterns = { 'node_modules', '%.git', '%.venv' },
+          file_ignore_patterns = {
+            'node_modules',
+            '%.git',
+            '__pycache__', -- Python cache files
+            '%.venv', -- Python virtual environment directory
+            '%.cache', -- Generic cache directory
+            'target', -- Rust build directory
+            'dist', -- Common build/distribution directory
+            'build', -- Common build directory
+            '%.DS_Store', -- macOS metadata files
+            'thumbs%.db', -- Windows thumbnail cache
+            'coverage', -- Test coverage reports
+            '%.jpg', -- Example: Ignore all JPG files
+            '%.png', -- Example: Ignore all PNG files
+          },
+
           hidden = true,
         },
         live_grep = {
-          file_ignore_patterns = { 'node_modules', '%.git', '%.venv' },
+          file_ignore_patterns = {
+            'node_modules',
+            '%.git',
+            '__pycache__', -- Python cache files
+            '%.venv', -- Python virtual environment directory
+            '%.cache', -- Generic cache directory
+            'target', -- Rust build directory
+            'dist', -- Common build/distribution directory
+            'build', -- Common build directory
+            '%.DS_Store', -- macOS metadata files
+            'thumbs%.db', -- Windows thumbnail cache
+            'coverage', -- Test coverage reports
+            '%.jpg', -- Example: Ignore all JPG files
+            '%.png', -- Example: Ignore all PNG files
+          },
+
           additional_args = function(_)
             return { '--hidden' }
           end,
