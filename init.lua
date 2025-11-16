@@ -1,41 +1,10 @@
-require 'core.options'
-require 'core.keymaps'
-require 'core.snippets'
-require 'core.python_terminal'
-require 'plugins.statuscolumn'
-local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
-  local out = vim.fn.system { 'git', 'clone', '--filter=blob:none', '--branch=stable', lazyrepo, lazypath }
-  if vim.v.shell_error ~= 0 then
-    vim.api.nvim_echo({
-      { 'Failed to clone lazy.nvim:\n', 'ErrorMsg' },
-      { out, 'WarningMsg' },
-      { '\nPress any key to exit...' },
-    }, true, {})
-    vim.fn.getchar()
-    os.exit(1)
-  end
-end
-vim.opt.rtp:prepend(lazypath)
+vim.g.python3_host_prog = 'C:/Users/Saboor/miniconda3/python.exe'
 
-require('lazy').setup {
-  require 'plugins.neotree',
-  require 'plugins.theme',
-  require 'plugins.bufferline',
-  require 'plugins.lualine',
-  require 'plugins.treesitter',
-  require 'plugins.telescope',
-  require 'plugins.lsp',
-  require 'plugins.autocompletion',
-  require 'plugins.none-ls',
-  require 'plugins.gitsigns',
-  require 'plugins.alpha',
-  require 'plugins.indent-blankline',
-  require 'plugins.mics',
-  require 'plugins.comment',
-  require 'plugins.flash',
-  require 'plugins.markdown',
-  require 'plugins.neorg',
-  require 'plugins.checkmake',
-}
+require("core.settings")
+require("core.visuals")
+require("core.statusline")
+require("core.keymaps")
+require("core.commands")
+require('core.cmd')
+require('core.telescope_config')
+require('core.neo_tree_config')

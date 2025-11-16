@@ -1,92 +1,69 @@
--- Set leader key
-
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
--- Disable the spacebar key's default behavior in Normal and Visual modes
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-
--- For conciseness
-local opts = { noremap = true, silent = true }
+local opt = vim.opt
 local api = vim.api
--- save file
-vim.keymap.set('n', '<C-s>', '<cmd> w <CR>', opts)
+local opts = {noremap= true, silent = true}
+-- Leader Key
+-- 🌲 Super Minimal Netrw
+vim.g.netrw_banner = 0
+vim.g.netrw_liststyle = 3
+vim.g.netrw_browse_split = 0
+vim.g.netrw_altv = 1
+vim.g.netrw_winsize = 25
+vim.g.netrw_preview = 0
+vim.g.netrw_keepdir = 0
+vim.g.netrw_hide = 1
+vim.g.netrw_list_hide = '^\\./$,^\\../$'
+vim.g.netrw_sort_by = 'name'
+vim.g.netrw_sort_sequence = [[[\/]$,*]]
+vim.g.netrw_fastbrowse = 0
 
--- save file without auto-formatting
-vim.keymap.set('n', '<leader>sn', '<cmd>noautocmd w <CR>', opts)
 
--- quit file
-vim.keymap.set('n', '<C-q>', '<cmd> q <CR>', opts)
+-- function ToggleNetrw()
+--     local netrw_buf_name = "__Netrw__"
+--     local netrw_bufnr = vim.fn.bufnr(netrw_buf_name)
+--     local netrw_winid = -1
+--     if netrw_bufnr ~= -1 then
+--         for _, winid in ipairs(api.nvim_list_wins()) do
+--             if api.nvim_win_get_buf(winid) == netrw_bufnr then
+--                 netrw_winid = winid
+--                 break
+--             end
+--         end
+--     end
+--
+--     if netrw_winid ~= -1 then
+--         if api.nvim_get_current_win() == netrw_winid then
+--             vim.cmd("wincmd p")
+--         end
+--         api.nvim_win_close(netrw_winid, true)
+--     else
+--         vim.cmd("vertical 28 Lexplore")
+--         vim.cmd("wincmd p")
+--     end
+-- end
+-- -- Disable auto commenting in a new line for certain file types
+-- api.nvim_create_autocmd("FileType", {
+--     callback = function()
+--         opt.formatoptions:remove({'c', 'r', 'o'})
+--     end,
+-- })
+-- -- Window Navigation
+-- api.nvim_set_keymap('n', '<C-h>', '<C-w>h', opts) -- Move focus left
+-- api.nvim_set_keymap('n', '<C-l>', '<C-w>l', opts) -- Move focus right
+-- api.nvim_set_keymap('n', '<leader>e', '<cmd>lua ToggleNetrw()<CR>', opts) -- Toggle File Explorer (Sidebar)
+-- vim.g.netrw_altmap = 1
+-- Closing compaction in insert mode
+api.nvim_set_keymap('i', '[', '[]<left>', opts)
+api.nvim_set_keymap('i', '(', '()<left>', opts)
+api.nvim_set_keymap('i', '{', '{}<left>', opts)
+api.nvim_set_keymap('i', '"', '""<left>', opts)
+api.nvim_set_keymap('i', '/*', '/**/<left><left>', opts)
 
--- delete single character without copying into register
-vim.keymap.set('n', 'x', '"_x', opts)
+-- Search for files 
+-- api.nvim_set_keymap('n', '<C-p>', ':find ', opts)
 
--- Vertical scroll and center
-vim.keymap.set('n', '<C-d>', '<C-d>zz', opts)
-vim.keymap.set('n', '<C-u>', '<C-u>zz', opts)
+api.nvim_set_keymap('n', '<leader>n', ':bn<CR>', opts)
+api.nvim_set_keymap('n', '<leader>p', ':bp<CR>', opts)
 
--- Find and center
-vim.keymap.set('n', 'n', 'nzzzv', opts)
-vim.keymap.set('n', 'N', 'Nzzzv', opts)
-
--- Resize with arrows
-vim.keymap.set('n', '<Up>', ':resize -2<CR>', opts)
-vim.keymap.set('n', '<Down>', ':resize +2<CR>', opts)
-vim.keymap.set('n', '<Left>', ':vertical resize -2<CR>', opts)
-vim.keymap.set('n', '<Right>', ':vertical resize +2<CR>', opts)
-
--- Buffers
-vim.keymap.set('n', '<Tab>', ':bnext<CR>', opts)
-vim.keymap.set('n', '<S-Tab>', ':bprevious<CR>', opts)
-vim.keymap.set('n', '<leader>x', ':bdelete!<CR>', opts) -- close buffer
-vim.keymap.set('n', '<leader>b', '<cmd> enew <CR>', opts) -- new buffer
-
--- Window management
-vim.keymap.set('n', '<leader>v', '<C-w>v', opts) -- split window vertically
-vim.keymap.set('n', '<leader>h', '<C-w>s', opts) -- split window horizontally
-vim.keymap.set('n', '<leader>se', '<C-w>=', opts) -- make split windows equal width & height
-vim.keymap.set('n', '<leader>xs', ':close<CR>', opts) -- close current split window
-
--- Navigate between splits
-vim.keymap.set('n', '<C-k>', ':wincmd k<CR>', opts)
-vim.keymap.set('n', '<C-j>', ':wincmd j<CR>', opts)
-vim.keymap.set('n', '<C-h>', ':wincmd h<CR>', opts)
-vim.keymap.set('n', '<C-l>', ':wincmd l<CR>', opts)
-
--- Tabs
-vim.keymap.set('n', '<leader>to', ':tabnew<CR>', opts) -- open new tab
-vim.keymap.set('n', '<leader>tx', ':tabclose<CR>', opts) -- close current tab
-vim.keymap.set('n', '<leader>tn', ':tabn<CR>', opts) --  go to next tab
-vim.keymap.set('n', '<leader>tp', ':tabp<CR>', opts) --  go to previous tab
-
--- Toggle line wrapping
-vim.keymap.set('n', '<leader>lw', '<cmd>set wrap!<CR>', opts)
-
--- Stay in indent mode
-vim.keymap.set('v', '<', '<gv', opts)
-vim.keymap.set('v', '>', '>gv', opts)
-
--- Keep last yanked when pasting
-vim.keymap.set('v', 'p', '"_dP', opts)
--- move lines
-vim.api.nvim_set_keymap('v', '<A-k>', ':move -2<CR>', { noremap = true, silent = true, desc = 'Move line up' })
-vim.api.nvim_set_keymap('v', '<A-j>', ':move +1<CR>', { noremap = true, silent = true, desc = 'Move line down' })
--- Diagnostic keymaps
-vim.keymap.set('n', '[d', function()
-  vim.diagnostic.jump { count = -1, float = true }
-end, { desc = 'Go to previous diagnostic message' })
-
-vim.keymap.set('n', ']d', function()
-  vim.diagnostic.jump { count = 1, float = true }
-end, { desc = 'Go to next diagnostic message' })
-
-vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
-
--- Keymap to open the Markdown preview
-vim.keymap.set('n', '<leader>mp', '<cmd>MarkdownPreview<CR>', { desc = 'Open Markdown Preview', buffer = true })
-
--- Keymap to stop/close the Markdown preview
-vim.keymap.set('n', '<leader>mc', '<cmd>MarkdownPreviewStop<CR>', { desc = 'Close Markdown Preview', buffer = true })
--- :find, search files
-api.nvim_set_keymap('n', '<leader>ff', ':find ', { noremap = true })
+api.nvim_set_keymap('n', '<leader>g', ':vimgrep /', opts)
+-- Set comment string for buffer
+vim.bo.commentstring = '#%s'
