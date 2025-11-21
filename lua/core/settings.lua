@@ -16,9 +16,9 @@ opt.tabstop = 4
 opt.shiftwidth = 4
 
 -- Line Numbers
-opt.number = true      -- Absolute line number
--- opt.relativenumber = true -- Relative line numbers
-opt.signcolumn = "yes" -- Always show sign column
+opt.number = true         -- Absolute line number
+opt.relativenumber = true -- Relative line numbers
+opt.signcolumn = "yes"    -- Always show sign column
 
 -- Searching
 opt.ignorecase = true    -- Ignore case in search patterns
@@ -67,6 +67,5 @@ api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
 
 -- Go to the previous diagnostic
 api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-
 -- Show the diagnostic message in a floating window (at cursor position)
 api.nvim_set_keymap('n', '<leader>vd', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)

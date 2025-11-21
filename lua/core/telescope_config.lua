@@ -61,3 +61,4 @@ api.nvim_set_keymap('n', '<C-p>', '<cmd>Telescope find_files<CR>', opts)
 -- Map <leader>fg to Live Grep (search for text content)
 api.nvim_set_keymap('n', '<leader>fg', '<cmd>Telescope live_grep<CR>', opts)
 api.nvim_set_keymap('n', '<leader>sk', '<cmd>Telescope lsp_workspace_symbols<CR>', opts)
+api.nvim_set_keymap('n', '<leader>fb', '<cmd>Telescope buffers<CR>', opts) -- List Open Buffers

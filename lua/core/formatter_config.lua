@@ -10,12 +10,11 @@ conform.setup({
         json = { "prettier" },
         php = { "phpcbf" },
     },
-    format = {
-        stop_after_first = true
-    },
+
     format_on_save = {
         timeout_ms = 500,
-        lsp_fallback = true, -- Use LSP formatting if conform has no specific formatter
+        lsp_fallback = true,     -- Use LSP formatting if conform has no specific formatter
+        stop_after_first = true, --
     },
 })
 -- This is optional
